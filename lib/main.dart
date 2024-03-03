@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vegetable_app_major/FridgePage.dart';
 import 'package:vegetable_app_major/Homepage.dart';
+import 'package:vegetable_app_major/Screens/LoginPage.dart';
+import 'package:vegetable_app_major/Screens/PasswordValidation.dart';
+import 'package:vegetable_app_major/Screens/RegisterWithPhoneNumber.dart';
 import 'package:vegetable_app_major/SearchPage.dart';
 import 'package:vegetable_app_major/SettingsPage.dart';
 import 'package:vegetable_app_major/State/FrigeProvider.dart';
@@ -27,7 +30,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int bottomNavigationIndex = 0;
 
-  List<Widget> pagesList = [Homepage(),SearchPage(),FridgePage()];
+  List<Widget> pagesList = [LoginPage(),PasswordValidation(),RegisterWithPhoneNumber()];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

@@ -40,7 +40,11 @@ dependencies:
   flutterflow_ui: ^0.2.0+1
   provider: ^6.0.4
   image: ^4.1.7
-
+  intl_phone_number_input: ^0.7.4
+  iconsax:
+  animate_do:
+  flutter_verification_code: ^1.1.7
+  loading_indicator: ^3.1.1
 
 dev_dependencies:
   flutter_test:

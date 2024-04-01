@@ -1,7 +1,18 @@
-# vegetable_app_major
-
-A new Flutter project.
-
+## AI powered Vegetable-Inventory app
+This app gives you power of AI
+### NOTE - Currently in developement phase
+### Techstack
+- Flutter
+- Provider
+- Tensorflow lite
+- CNN
+### Screenshot-
+<div style="display:flex;">
+<img src="images/screenshot/1.png" alt="homepage" width="320px"  />
+<img src="images/screenshot/2.png" alt="homepage" width="320px" />
+<img src="images/screenshot/3.png" alt="homepage"  width="320px"/>
+  
+</div>
 ## Getting Started
 
 This project is a starting point for a Flutter application.

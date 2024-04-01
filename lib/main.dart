@@ -6,17 +6,13 @@ import 'package:vegetable_app_major/Screens/LoginPage.dart';
 import 'package:vegetable_app_major/Screens/PasswordValidation.dart';
 import 'package:vegetable_app_major/Screens/RegisterWithPhoneNumber.dart';
 import 'package:vegetable_app_major/SearchPage.dart';
-import 'package:vegetable_app_major/SettingsPage.dart';
-import 'package:vegetable_app_major/State/FrigeProvider.dart';
-
 import 'State/Fridge.dart';
 
 void main() {
   runApp( ChangeNotifierProvider<Fridge>(
     create: (_) => Fridge(),
-    child: MainPage(), // MyApp becomes a stateless widget
+    child: const MainPage(), // MyApp becomes a stateless widget
   ),
-
   );
 }
 
@@ -30,7 +26,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int bottomNavigationIndex = 0;
 
-  List<Widget> pagesList = [LoginPage(),PasswordValidation(),RegisterWithPhoneNumber()];
+  //List<Widget> pagesList = [const LoginPage(),const PasswordValidation(),const RegisterWithPhoneNumber()];
+  List<Widget> pagesList = [const Homepage(),const SearchPage(),const FridgePage(),];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -44,7 +41,7 @@ class _MainPageState extends State<MainPage> {
             });
           },
           currentIndex: bottomNavigationIndex,
-          items: [
+          items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home_sharp), label: 'Home'),
             BottomNavigationBarItem(

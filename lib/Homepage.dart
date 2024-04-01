@@ -48,19 +48,19 @@ class _HomepageState extends State<Homepage> {
       body: SafeArea(
         top: true,
         child: Align(
-          alignment: AlignmentDirectional(-1, -1),
+          alignment: const AlignmentDirectional(-1, -1),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
+                      const Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
@@ -71,12 +71,12 @@ class _HomepageState extends State<Homepage> {
                       ),
                       Flexible(
                         child: Align(
-                          alignment: AlignmentDirectional(1, 0),
+                          alignment: const AlignmentDirectional(1, 0),
                           child: Container(
                             width: 52,
                             height: 52,
                             clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child:  InkWell(
@@ -87,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                               onTap: () async {print("User Ankit");},
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image(
+                                child: const Image(
                                   image: AssetImage('images/a.png'),
                                   width: 300,
                                   height: 300,
@@ -106,7 +106,7 @@ class _HomepageState extends State<Homepage> {
                   child: Container(
                     width: 368,
                     height: 34,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                   ),
@@ -122,7 +122,7 @@ class _HomepageState extends State<Homepage> {
                           height: 119,
                           decoration: BoxDecoration(
                             color: Colors.orange[100],
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(0),
                               bottomRight: Radius.circular(40),
                               topLeft: Radius.circular(0),
@@ -130,15 +130,15 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           child: Align(
-                            alignment: AlignmentDirectional(0, 0),
+                            alignment: const AlignmentDirectional(0, 0),
                             child: Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                                  const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Align(
+                                  const Align(
                                     alignment: AlignmentDirectional(0, 0),
                                     child: Text(
                                         'Find recipes based on what you have already home',
@@ -153,10 +153,10 @@ class _HomepageState extends State<Homepage> {
                                       width: 100,
                                       height: 13,
                                       decoration:
-                                          BoxDecoration(color: Colors.white),
+                                          const BoxDecoration(color: Colors.white),
                                     ),
                                   ),
-                                  Align(
+                                  const Align(
                                     alignment: AlignmentDirectional(-1, 0),
                                     child: Text('Let\'s Try ',
                                         style: TextStyle(
@@ -179,12 +179,12 @@ class _HomepageState extends State<Homepage> {
                   child: Container(
                     width: 417,
                     height: 41,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -215,7 +215,7 @@ class _HomepageState extends State<Homepage> {
                  padding: const EdgeInsets.all(16.0),
                  child: GridView.builder(
                    itemCount: imagePaths.length,
-                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                      crossAxisCount: 2, // Two columns
                      mainAxisSpacing: 12.0, // Spacing between rows
                      crossAxisSpacing: 12.0, // Spacing between columns

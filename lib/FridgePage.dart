@@ -6,10 +6,12 @@ import 'State/Fridge.dart';
 
 
 class FridgePage extends StatelessWidget {
+  const FridgePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('My Fridge')),
+        appBar: AppBar(title: const Text('My Fridge')),
         body: Consumer<Fridge>(
             builder: (context, fridge, child) {
               return ListView.builder(
@@ -23,12 +25,12 @@ class FridgePage extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
-                                    icon: Icon(Icons.delete),
+                                    icon: const Icon(Icons.delete),
                                     onPressed: () =>
                                         fridge.removeVegetable(vegetable),
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.search),
+                                    icon: const Icon(Icons.search),
                                     onPressed: () async {
                                       // Call prediction logic using your specific implementation
                                       // ...

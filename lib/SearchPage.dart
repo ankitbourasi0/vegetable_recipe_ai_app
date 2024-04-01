@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vegetable_app_major/State/Fridge.dart';
 import 'package:vegetable_app_major/service/VegetableService.dart';
 
-import 'State/Fridge.dart';
 import 'model/Vegetable.dart';
 
 class SearchPage extends StatefulWidget {
@@ -38,14 +38,16 @@ class _SearchPageState extends State<SearchPage> {
 
   // Sample data for searching
 
-  List<String> filteredData = [];
+  List<Vegetable> filteredData = [];
 
   // Function to filter data based on search query
   void filterData(String query) {
     filteredData = vegetables
         .where((vegetable) =>
             vegetable.label.toLowerCase().contains(query.toLowerCase()))
-        .map((vegetable) => vegetable.label) // Extract only vegetable names
+        .map((vegetable) => Vegetable(
+            label: vegetable.label,
+            image: vegetable.image)) // Extract vegetable names and image path
         .toList();
     setState(() {}); // Update UI with filtered data
   }
@@ -57,20 +59,20 @@ class _SearchPageState extends State<SearchPage> {
         body: SafeArea(
             top: true,
             child: Align(
-                alignment: AlignmentDirectional(-1, -1),
+                alignment: const AlignmentDirectional(-1, -1),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Column(
                     children: [
-                      Center(
+                      const Center(
                         child: Text(
-                          'What to eat\n \t today?',
+                          'What you bring\n \t today?',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.w600, fontSize: 26),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 12,
                       ),
                       Padding(
@@ -88,14 +90,13 @@ class _SearchPageState extends State<SearchPage> {
                               Expanded(
                                 child: TextField(
                                   controller: _textController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       hintText: "Search",
                                       prefixIcon: Icon(Icons.search),
                                       border: InputBorder.none),
                                   onChanged: (value) => filterData(value),
                                 ),
                               ),
-
                             ],
                           ),
                         ),
@@ -104,19 +105,137 @@ class _SearchPageState extends State<SearchPage> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
                           child: ListView.builder(
-                            itemCount: _textController.text.isEmpty ? vegetables.length : filteredData.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title:  Text(_textController.text.isEmpty
-                                    ? vegetables[index].label
-                                    : filteredData[index]), // Use vegetables or filteredData accordingly,
-                              );
-                            },
-                          ),
+                              itemCount: _textController.text.isEmpty
+                                  ? vegetables.length
+                                  : filteredData.length,
+                              itemBuilder: (context, index) {
+                                final item = _textController.text.isEmpty
+                                    ? vegetables[index]
+                                    : filteredData[index];
+
+                                return ListBody(
+                                    mainAxis: Axis.vertical,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 6, 10, 6),
+                                        child: ListTile(
+                                          leading: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            child: Image(
+                                              image: AssetImage(item.image),
+                                              width: 60,
+                                              height: 60,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          title: Text(
+                                            item.label,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 22),
+                                          ),
+                                          trailing: IconButton(
+                                              onPressed: () {
+                                                // Get the CartProvider instance
+                                                final fridgeItem = Provider.of<Fridge>(context, listen: false);
+                                                final vegetableItem = Vegetable(label: item.label,image: item.image);
+                                                fridgeItem.addVegetable(vegetableItem);
+                                                print("Added ${item.label}");
+                                              },
+                                              icon: const Icon(
+                                                Icons.add,
+                                              ),
+                                              color: Colors.amberAccent,
+                                              iconSize: 30,
+                                              style: ButtonStyle(
+                                                foregroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(Colors.white),
+                                                backgroundColor:
+                                                    MaterialStateProperty
+                                                        .resolveWith<Color?>(
+                                                  (Set<MaterialState> states) {
+                                                    if (states.contains(
+                                                        MaterialState
+                                                            .hovered)) {
+                                                      return Colors
+                                                          .lightGreenAccent
+                                                          .withOpacity(0.12);
+                                                    }
+                                                    if (states.contains(
+                                                            MaterialState
+                                                                .focused) ||
+                                                        states.contains(
+                                                            MaterialState
+                                                                .pressed)) {
+                                                      return Colors
+                                                          .lightGreenAccent
+                                                          .withOpacity(1.0);
+                                                    }
+                                                    return Colors
+                                                        .lightGreenAccent
+                                                        .withOpacity(
+                                                            0.80); // Defer to the widget's default.
+                                                  },
+                                                ),
+                                              )),
+                                          // focusColor,
+                                          // hoverColor,
+
+                                          // splashColor,
+                                          // disabledColor
+                                        ),
+                                      ),
+                                    ]);
+                                // If the search field has text, item is a Map
+                              }),
                         ),
                       ),
                     ],
                   ),
                 ))));
   }
+}
+
+Widget vegCard(String imagePath, String title) {
+  print("$imagePath + $title");
+  return Container(
+    width: double.maxFinite,
+    height: 100,
+    decoration: BoxDecoration(
+      color: Colors.black12,
+      borderRadius: BorderRadius.circular(20),
+      shape: BoxShape.rectangle,
+    ),
+    child: Stack(
+      children: [
+        InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () async {},
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image(
+              image: AssetImage(imagePath),
+              width: 375,
+              height: 518,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Align(
+          alignment: AlignmentDirectional(0, 0),
+          child: Text(
+            title,
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        )
+      ],
+    ),
+  );
 }

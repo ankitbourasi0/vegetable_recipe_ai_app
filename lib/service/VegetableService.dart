@@ -1,4 +1,3 @@
-import '../model/Vegetable.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 class VegetableService{
@@ -15,11 +14,7 @@ class VegetableService{
   //dummy Data
   Future<Map<String, String>> generateVegetableData() async {
     final imagePaths = await loadAllImagePaths();
-    final vegetableData = Map<String, String>.fromIterable(
-      imagePaths,
-      key: (path) => path.split('/').last.split('.').first, // Extract label from path
-      value: (path) => path,
-    );
+    final vegetableData = { for (var path in imagePaths) path.split('/').last.split('.').first : path };
     return vegetableData;
   }
 

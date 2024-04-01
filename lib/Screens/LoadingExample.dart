@@ -15,13 +15,13 @@ class _LoadingExampleState extends State<LoadingExample> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 50),
+          padding: const EdgeInsets.symmetric(vertical: 50),
           width: double.infinity,
-          child: Column(
+          child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballScaleMultiple,
@@ -29,7 +29,7 @@ class _LoadingExampleState extends State<LoadingExample> {
                   strokeWidth: 2,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballSpinFadeLoader,
@@ -37,7 +37,7 @@ class _LoadingExampleState extends State<LoadingExample> {
                   strokeWidth: 2,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.pacman,
@@ -45,7 +45,7 @@ class _LoadingExampleState extends State<LoadingExample> {
                   strokeWidth: 2,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.lineScale,
@@ -53,7 +53,7 @@ class _LoadingExampleState extends State<LoadingExample> {
                   strokeWidth: 2,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballClipRotateMultiple,
@@ -61,7 +61,7 @@ class _LoadingExampleState extends State<LoadingExample> {
                   strokeWidth: 2,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 100,
                 child: LoadingIndicator(
                   indicatorType: Indicator.ballRotate,

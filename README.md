@@ -1,6 +1,10 @@
-## AI powered Vegetable-Inventory app
-This app gives you power of AI
-### NOTE - Currently in developement phase
+## AI powered Vegetable-Inventory app ⚡
+This app gives you the power of AI, Now you dont need to add vegetable by your finger scan and add to your fridge.🛒
+We give you recommendation based on vegetable you have in your fridge, dont need to think, just sit on your couch and get recommendations. 🎁
+### NOTE - Currently in developement phase not for use
+
+### Kaggle notebook- Image Classifier
+Link - https://www.kaggle.com/code/ankitbourasi/vegetable-classification-using-inception-v3
 ### Techstack
 - Flutter
 - Provider

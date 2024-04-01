@@ -8,9 +8,9 @@ This app gives you power of AI
 - CNN
 ### Screenshot-
 <div style="display:flex;">
-<img src="images/screenshot/1.png" alt="homepage" width="320px"  />
-<img src="images/screenshot/2.png" alt="homepage" width="320px" />
-<img src="images/screenshot/3.png" alt="homepage"  width="320px"/>
+<img src="images/screenshot/1.png" alt="homepage" width="220px"  />
+<img src="images/screenshot/2.png" alt="homepage" width="220px" />
+<img src="images/screenshot/3.png" alt="homepage"  width="220px"/>
   
 </div>
 ## Getting Started

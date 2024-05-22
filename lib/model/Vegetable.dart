@@ -1,8 +1,8 @@
 
 
 class Vegetable {
-  final String label;
-  final String image;
+   String label;
+   String image;
    double? _unitInKg;
 
    Vegetable({

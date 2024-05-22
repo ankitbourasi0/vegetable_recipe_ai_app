@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vegetable_app_major/FridgePage.dart';
 import 'package:vegetable_app_major/Homepage.dart';
-import 'package:vegetable_app_major/Screens/LoginPage.dart';
-import 'package:vegetable_app_major/Screens/PasswordValidation.dart';
-import 'package:vegetable_app_major/Screens/RegisterWithPhoneNumber.dart';
+import 'package:vegetable_app_major/RecipePage.dart';
+import 'package:vegetable_app_major/ScanPage.dart';
 import 'package:vegetable_app_major/SearchPage.dart';
-import 'State/Fridge.dart';
 
-void main() {
-  runApp( ChangeNotifierProvider<Fridge>(
-    create: (_) => Fridge(),
-    child: const MainPage(), // MyApp becomes a stateless widget
-  ),
+import 'State/Fridge.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
+
+  runApp(
+    ChangeNotifierProvider<Fridge>(
+      create: (_) => Fridge(),
+      child: const MainPage(), // MyApp becomes a stateless widget
+    ),
   );
 }
 
@@ -27,32 +30,36 @@ class _MainPageState extends State<MainPage> {
   int bottomNavigationIndex = 0;
 
   //List<Widget> pagesList = [const LoginPage(),const PasswordValidation(),const RegisterWithPhoneNumber()];
-  List<Widget> pagesList = [const Homepage(),const SearchPage(),const FridgePage(),];
+  List<Widget> pagesList = [
+    const Homepage(),
+    const SearchPage(),
+    const ScanPage(),
+    const RecipePage(),
+    // const FridgePage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: pagesList[bottomNavigationIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          onTap: (index) {
-            setState(() {
-              bottomNavigationIndex = index;
-            });
-          },
-          currentIndex: bottomNavigationIndex,
-          items: const [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_sharp), label: 'Home'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.search_sharp), label: 'Search'),
-         //   BottomNavigationBarItem(
-           //     icon: Icon(Icons.settings), label: 'Settings'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.inventory), label: 'Fridge'),
-          ],
-        ),
-      ),
+          body: pagesList[bottomNavigationIndex],
+          bottomNavigationBar: NavigationBar(
+            onDestinationSelected: (value) {
+              setState(() {
+                bottomNavigationIndex = value;
+              });
+            },
+            destinations: const [
+              NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+              NavigationDestination(
+                  icon: Icon(Icons.search_sharp), label: 'Search'),
+              NavigationDestination(icon: Icon(Icons.camera), label: "Scan"),
+              NavigationDestination(
+                  icon: Icon(Icons.food_bank), label: 'Recipes')
+              // NavigationDestination(
+              //     icon: Icon(Icons.inventory), label: 'Fridge'),
+            ],
+          )),
     );
   }
 }

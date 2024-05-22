@@ -11,7 +11,11 @@ class FridgePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('My Fridge')),
+        appBar: AppBar(title: const Text('My Fridge'),leading: ElevatedButton(
+  onPressed: () {
+  },
+  child: const Text('Get Recipe'),
+),),
         body: Consumer<Fridge>(
             builder: (context, fridge, child) {
               return ListView.builder(

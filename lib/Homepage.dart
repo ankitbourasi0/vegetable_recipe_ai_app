@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'dart:io';
+import 'package:provider/provider.dart';
+import 'package:vegetable_app_major/State/Fridge.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -9,15 +13,15 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-
 class _HomepageState extends State<Homepage> {
-
   List<String> imagePaths = [];
   Future<List<String>> loadAllImagePaths() async {
     final manifestString = await rootBundle.loadString('AssetManifest.json');
     final manifest = json.decode(manifestString) as Map<String, dynamic>;
 
-    final imageKeys = manifest.keys.where((key) => key.startsWith('images/image-with-names/')).toList();
+    final imageKeys = manifest.keys
+        .where((key) => key.startsWith('images/image-with-names/'))
+        .toList();
     return imageKeys;
     /*This method:
 
@@ -65,7 +69,8 @@ class _HomepageState extends State<Homepage> {
                         children: [
                           Text(
                             'Hi, Ankit',
-                            style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -79,12 +84,14 @@ class _HomepageState extends State<Homepage> {
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
-                            child:  InkWell(
+                            child: InkWell(
                               splashColor: Colors.transparent,
                               focusColor: Colors.transparent,
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
-                              onTap: () async {print("User Ankit");},
+                              onTap: () async {
+                                print("User Ankit");
+                              },
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: const Image(
@@ -132,8 +139,8 @@ class _HomepageState extends State<Homepage> {
                           child: Align(
                             alignment: const AlignmentDirectional(0, 0),
                             child: Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12, 0, 0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -152,8 +159,8 @@ class _HomepageState extends State<Homepage> {
                                     child: Container(
                                       width: 100,
                                       height: 13,
-                                      decoration:
-                                          const BoxDecoration(color: Colors.white),
+                                      decoration: const BoxDecoration(
+                                          color: Colors.white),
                                     ),
                                   ),
                                   const Align(
@@ -210,25 +217,63 @@ class _HomepageState extends State<Homepage> {
                     ],
                   ),
                 ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 16),
+                    child: Consumer<Fridge>(builder: (context, fridge, child) {
+                      return ListView.builder(
+                          itemCount: fridge.vegetables.length,
+                          itemBuilder: (context, index) {
+                            final item = fridge.vegetables[index];
 
-               Expanded(child:Padding(
-                 padding: const EdgeInsets.all(16.0),
-                 child: GridView.builder(
-                   itemCount: imagePaths.length,
-                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                     crossAxisCount: 2, // Two columns
-                     mainAxisSpacing: 12.0, // Spacing between rows
-                     crossAxisSpacing: 12.0, // Spacing between columns
-                   ),
-                   itemBuilder: (context, index) {
-                     final imagePath = imagePaths[index];
-                     return vegCard(imagePath);
-
-                   },
-                 ),
-               ),
-               )
-
+                            return ListTile(
+                              leading: CircleAvatar(
+                                  radius: 25,
+                                  backgroundImage: FileImage(File(item.image))),
+                              title: Text(
+                                item.label,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                              trailing: Ink(
+                                decoration: const ShapeDecoration(
+                                  color: Colors.red,
+                                  shape: CircleBorder(),
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(Icons.close),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    final Fridgeitem = Provider.of<Fridge>(
+                                        context,
+                                        listen: false);
+                                    Fridgeitem.removeVegetable(item);
+                                  },
+                                ),
+                              ),
+                            );
+                          });
+                      //
+                      //
+                      // GridView.builder(
+                      //   // itemCount: imagePaths.length,
+                      //   itemCount: fridge.vegetables.length,
+                      //   gridDelegate:
+                      //       const SliverGridDelegateWithFixedCrossAxisCount(
+                      //     crossAxisCount: 2, // Two columns
+                      //     mainAxisSpacing: 12.0, // Spacing between rows
+                      //     crossAxisSpacing: 12.0, // Spacing between columns
+                      //   ),
+                      //   itemBuilder: (context, index) {
+                      //     final imagePath = fridge.vegetables[index].image;
+                      //     // final imagePath = imagePaths[index];
+                      //     return vegCard(imagePath);
+                      //   },
+                      // );
+                    }),
+                  ),
+                )
               ],
             ),
           ),
@@ -239,6 +284,7 @@ class _HomepageState extends State<Homepage> {
 }
 
 Widget vegCard(String imagePath) {
+  print("${imagePath}");
   return Container(
     width: 100,
     height: 100,
@@ -265,7 +311,7 @@ Widget vegCard(String imagePath) {
             ),
           ),
         ),
-      /*  Align(
+        /*  Align(
           alignment: AlignmentDirectional(0, 0),
           child: Text(
             'Hello World',

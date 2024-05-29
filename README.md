@@ -10,11 +10,20 @@ Link - https://www.kaggle.com/code/ankitbourasi/vegetable-classification-using-i
 - Provider
 - Tensorflow lite
 - CNN
-### Screenshot-
+### Pick Image from Gallery or Camera
+Get predictions of your vegetables and add to your fridge.
+Anytime want to make something Don't think just get recipe on vegetable you have 
+
+###  Checkout Screenshot-
 <div style="display:flex;">
 <img src="images/screenshot/1.png" alt="homepage" width="220px"  />
 <img src="images/screenshot/2.png" alt="homepage" width="220px" />
-<img src="images/screenshot/3.png" alt="homepage"  width="220px"/>
+
+<img src="images/screenshot/Screenshot_20240521_012210.png" alt="homepage"  width="220px"/>
+<img src="images/screenshot/Screenshot_20240521_012302.png" alt="homepage"  width="220px"/>
+<img src="images/screenshot/Screenshot_20240521_012332.png" alt="homepage"  width="220px"/>
+  
+
   
 </div>
 ## Getting Started
